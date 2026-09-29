@@ -7,16 +7,18 @@ from .processors import (
 )
 from .analytics import (
     calculate_student_avg, get_min_max_grades, sort_by_avg_grade, 
-    create_avg_grade_filter, create_student_record, calculate_custom_avg
+    create_avg_grade_filter, create_student_record, calculate_custom_avg,
+    determine_success  # Додано імпорт функції визначення успішності
 )
 from .decorators import measure_time
 
 def print_students(title: str, students: list[dict]):
     print(f"\n{title}")
-    print("-" * 65)
+    print("-" * 85)  # Збільшено ширину лінії для нового поля
     for s in students:
         avg = calculate_student_avg(s)
-        print(f"ID: {s['id']:<2} | ПІБ: {s['name']:<20} | Дисципліна: {s['discipline']:<15} | Сер. бал: {avg:.2f}")
+        status = determine_success(s)  # Виклик функції визначення успішності
+        print(f"ID: {s['id']:<2} | ПІБ: {s['name']:<20} | Дисципліна: {s['discipline']:<15} | Сер. бал: {avg:.2f} | Статус: {status}")
 
 @measure_time
 def run_benchmark(records_count: int):

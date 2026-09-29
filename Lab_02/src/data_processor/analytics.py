@@ -29,3 +29,14 @@ def calculate_custom_avg(*grades: int) -> float:
 def create_student_record(**fields) -> dict:
     """Демонстрація використання **kwargs для створення запису."""
     return dict(fields)
+
+def determine_success(student: dict) -> str:
+    """Визначення успішності студента за середнім балом."""
+    avg = calculate_student_avg(student)
+    if avg >= 90:
+        return "Відмінно"
+    elif avg >= 75:
+        return "Добре"
+    elif avg >= 60:
+        return "Задовільно"
+    return "Незадовільно"
